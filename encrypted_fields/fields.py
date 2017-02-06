@@ -1,4 +1,3 @@
-
 import os
 import types
 import binascii
@@ -173,7 +172,7 @@ class EncryptedFieldMixin(object):
 
         try:
             value = self.crypter().decrypt(value)
-            value = value.decode('unicode_escape')
+            value = value.encode('unicode_escape')
         except keyczar.errors.KeyczarError:
             pass
         except UnicodeEncodeError:
@@ -191,7 +190,7 @@ class EncryptedFieldMixin(object):
 
         if isinstance(value, six.string_types):
             value = value.encode('unicode_escape')
-            value = value.encode('ascii')
+            value = value.decode('ascii')
         else:
             value = str(value)
 
