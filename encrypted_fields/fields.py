@@ -173,6 +173,7 @@ class EncryptedFieldMixin(object):
         try:
             value = self.crypter().decrypt(value)
             value = value.encode('unicode_escape')
+            value = value.decode('ascii')
         except keyczar.errors.KeyczarError:
             pass
         except UnicodeEncodeError:
